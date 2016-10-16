@@ -6,8 +6,13 @@
   background: #419be0;
 }
 
-div img {
+ul li div img {
   width: 370px;
+  height: 400px;
   object-fit: fill;
   margin:auto;
+}
+
+ul li div {
+  height: 400px;
 }
