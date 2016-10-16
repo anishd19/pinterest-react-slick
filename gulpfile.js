@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+var liveReload = require('gulp-livereload');
 var dest = './client/dist';
 
 gulp.task('browserify', function(){
@@ -9,7 +10,8 @@ gulp.task('browserify', function(){
     .transform("babelify", {presets: ["es2015", "react"]})
     .bundle()
     .pipe(source('main.js'))
-    .pipe(gulp.dest(dest +'/js'));
+    .pipe(gulp.dest(dest +'/js'))
+    .pipe(liveReload());
 });
 
 gulp.task('copy', function(){
@@ -22,4 +24,9 @@ gulp.task('copy', function(){
 
 gulp.task('default',  ['browserify', 'copy'], function() {
     return true;
+});
+
+gulp.task('live',  ['browserify', 'copy'], function() {
+    liveReload.listen();
+    gulp.watch('./client/src/**/*.*', ['browserify', 'copy']);
 });
