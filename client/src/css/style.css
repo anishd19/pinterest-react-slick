@@ -8,6 +8,7 @@
 
 div img {
   width: 80%;
+  height: 80%;
   object-fit: fill;
   margin:auto;
 }
