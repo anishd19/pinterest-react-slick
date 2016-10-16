@@ -50,7 +50,7 @@ var App = React.createClass({
     });
     console.log(s);
     this.setState({
-      pinImages: s
+      pinImages: u
     })
   },
 
@@ -65,19 +65,25 @@ var Slick = React.createClass({
 
   render: function() {
     var urlArray = this.props.foo;
-  	var settings = {
+
+    var settings = {
       customPaging: function(i) {
-        return <div><img src='https://s-media-cache-ak0.pinimg.com/originals/6c/37/d3/6c37d3dfe8636f07ed00ae22e3b3e937.jpg'/></div>
+        return <a><img src={`${urlArray[i]}`}/></a>
       },
-    	dots: true
+      dots: true,
+      dotsClass: 'slick-dots slick-thumb',
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
     }
     return (
     	<div className="container">
       	<Slider {...settings}>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <div><img src={urlArray[0]} /></div>
+          <div><img src={urlArray[1]} /></div>
+          <div><img src={urlArray[2]} /></div>
+          <div><img src={urlArray[3]} /></div>
         </Slider>
       </div>
     );
@@ -87,6 +93,59 @@ var Slick = React.createClass({
 ReactDOM.render(<App />, document.getElementById("app"));
 
 /*
+
+var images = urlArray.forEach(function(url) {
+  return(
+    <div><img src={url} /></div>
+  );
+})
+
+console.log(images);
+
+======
+
+
+<div><img src={baseUrl} /></div>
+<div><img src={baseUrl} /></div>
+<div><img src={baseUrl} /></div>
+<div><img src={baseUrl} /></div>
+
+
+=======
+
+export default class CenterMode extends Component {
+  render() {
+    const settings = {
+      customPaging: function(i) {
+        return <a><img src={`${baseUrl}/abstract0${i+1}.jpg`}/></a>
+      },
+      dots: true,
+      dotsClass: 'slick-dots slick-thumb',
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    return (
+      <div>
+        <h2>Custom Paging</h2>
+        <Slider {...settings}>
+          <div><img src={baseUrl + '/abstract01.jpg'} /></div>
+          <div><img src={baseUrl + '/abstract02.jpg'} /></div>
+          <div><img src={baseUrl + '/abstract03.jpg'} /></div>
+          <div><img src={baseUrl + '/abstract04.jpg'} /></div>
+        </Slider>
+      </div>
+    )
+  }
+}
+
+======
+customPaging: function(i) {
+  return <div><img src={urlArray[i]}/></div>
+},
+
+
 (<div><img src={urlArray[i]}/></div>)
 
 <div><img src='https://s-media-cache-ak0.pinimg.com/originals/6c/37/d3/6c37d3dfe8636f07ed00ae22e3b3e937.jpg'/></div>

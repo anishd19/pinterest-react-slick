@@ -6,13 +6,8 @@
   background: #419be0;
 }
 
-ul li div img {
-  width: 370px;
-  height: 400px;
+div img {
+  width: 80%;
   object-fit: fill;
   margin:auto;
-}
-
-ul li div {
-  height: 400px;
 }
